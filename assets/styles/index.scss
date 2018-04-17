@@ -47,8 +47,18 @@ body {
   }
 }
 
+#sign-in-error-message {
+  float: left;
+  color: red;
+  display: none;
+}
+
 #email {
   width: 80%;
+}
+
+.logged-in-navbar-items {
+  display: none;
 }
 
 .error-message {

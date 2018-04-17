@@ -19,9 +19,13 @@
           <div class="nav-brand">
             <h1> <i class="fab fa-bitcoin"></i>Spare Change </h1>
           </div>
-          <ul class="navbar-items">
+          <ul class="navbar-items logged-out-navbar-items">
             <li> <a href="#login" id="login-link"> Login </a> </li>
             <li> <a href="#signup" id="signup-link"> Signup </a> </li>
+          </ul>
+          <ul class="navbar-items logged-in-navbar-items">
+            <li> <a href="#login" id="login-link"> New Job </a> </li>
+            <li> <a href="#login" id="login-link"> Change Password </a> </li>
           </ul>
         </nav>
       </header>
@@ -96,6 +100,29 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn login-btn">Signup</button>
+              </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="signinModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form id="signinForm">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Login</h4>
+              </div>
+              <div class="modal-body">
+                <label> Email </label>
+                <input type="email" name="credentials[email]">
+                <label> Password </label>
+                <input type="password" name="credentials[password]">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn login-btn">Login</button>
+                <p id="sign-in-error-message"> Could Not Sign You In </p>
               </div>
             </form>
           </div><!-- /.modal-content -->
