@@ -1,13 +1,14 @@
 const store = require('../store')
 const apiUrl = require('../config')
 
-const getJobs = function() {
+const signUp = function (data) {
   return $.ajax({
-    method: 'GET',
-    url: apiUrl + '/jobs'
+    url: apiUrl + '/sign-up',
+    method: 'POST',
+    data
   })
 }
 
 module.exports = {
-  getJobs
+  signUp
 }

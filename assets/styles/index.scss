@@ -21,14 +21,70 @@ body {
   margin-top: 30px;
 }
 
+.navbar-items li {
+  float: left;
+  margin-left: 10px;
+}
+
+.navbar-items li a {
+    color: white;
+}
+
+.navbar-items {
+  list-style-type: none;
+  padding-top: 20px;
+  padding-right: 50px;
+  float: right;
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+#loginModal {
+  input {
+    outline: none;
+  }
+}
+
+#email {
+  width: 80%;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: red;
+  font-size: 12px;
+}
+
+#signupModal {
+  label {
+    margin-right: 10px;
+  }
+  input {
+    margin-top: 20px;
+  }
+}
+
+.login-btn {
+  background-color: #d3d3d3;
+}
+
 header {
   background: url('https://i.imgur.com/T08s9vk.jpg') no-repeat 55% 55%;
   height: 250px;
   color: white;
 }
-
+.nav-brand {
+  width: 300px;
+  display: inline-block;
+}
 h1 {
-  margin: 0px;
+  display: inline-block;
+  margin: 0px !important;
+  padding-right: 0px;
+  margin-right: 0px;
+  width: 300px;
   padding-top: 20px;
-  padding-left: 10px;
+  padding-left: 20px;
 }
