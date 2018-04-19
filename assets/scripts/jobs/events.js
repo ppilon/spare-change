@@ -16,6 +16,7 @@ const latlngs = {
 const jobHandlers = function () {
   $('#new-job-link').on('click', jobsUi.showCreateJobView)
 	$('#create-job-form').on('submit', onCreateJob)
+	$('#jobs-link').on('click', jobsUi.showJobsView)
   $('#create-job-view').on('keydown', 'input', (event) => {
     clearTimeout(timeout);
     timeout = setTimeout(function () {
@@ -106,6 +107,11 @@ const onGetJobs = function () {
     .then(jobsUi.onGetJobsSuccess)
 }
 
+const onGetPendingJobs = function () {
+  jobsApi.getPendingJobs()
+    .then(jobsUi.onGetPendingJobsSuccess)
+}
+
 const onCreateJob = function (event) {
 	event.preventDefault()
 	const data = getFormFields(event.target)
@@ -118,5 +124,6 @@ const onCreateJob = function (event) {
 
 module.exports = {
   jobHandlers,
-  onGetJobs
+  onGetJobs,
+	onGetPendingJobs
 }

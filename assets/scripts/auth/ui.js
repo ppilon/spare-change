@@ -40,6 +40,8 @@ const resetSignInForm = function () {
 }
 
 const onSignInSuccess = function (response) {
+  $('#logged-out-view').hide()
+  $('#logged-in-view').show()
   $('#sign-in-error-message').hide()
   $('#signinModal').modal('hide')
   $('.logged-in-navbar-items').show()
@@ -47,7 +49,7 @@ const onSignInSuccess = function (response) {
   resetSignInForm()
   store.user = response.user
   sessionStorage.setItem('user', JSON.stringify(store.user))
-  notification('success', "Successfully Logged In")
+  notification('success', "Successfully Logged In", 'header-notification')
 }
 
 const onSignInError = function () {
@@ -76,8 +78,10 @@ const openChangePasswordModal = function () {
 const onLogoutSuccess = function () {
   $('.logged-in-navbar-items').hide()
   $('.logged-out-navbar-items').show()
+  $('#logged-out-view').show()
+  $('#logged-in-view').hide()
   sessionStorage.removeItem('user')
-  notification('success', "Successfully Logged You Out")
+  notification('success', "Successfully Logged You Out", 'header-notification')
 }
 
 module.exports = {
