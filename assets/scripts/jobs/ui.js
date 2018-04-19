@@ -51,6 +51,7 @@ const displayDirections = function (directions) {
 
 const showCreateJobView = function () {
   $('#job-view').hide()
+  $('#user-profile-view').hide()
   $('#create-job-view').show()
   newJobMap = new google.maps.Map(document.getElementById('createJobMap'), {
     center: {lat: -34.397, lng: 150.644},
@@ -65,6 +66,7 @@ const displayJobCost = function (cost) {
 const showJobsView = function () {
   $('#job-view').show()
   $('#create-job-view').hide()
+  $('#user-profile-view').hide()
 }
 
 const onGetDirectionsError = function (directions) {

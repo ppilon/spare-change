@@ -2,6 +2,7 @@ const notification = require('../../../lib/notifications')
 const userProfileTemplate = require('../templates/user-profile.hbs')
 
 const onGetUserProfileSuccess = function (response) {
+  $('#user-profile-col').empty()
   $('#user-profile-view').show()
   $('#job-view').hide()
   $('#create-job-view').hide()
