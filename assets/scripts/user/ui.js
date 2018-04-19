@@ -1,6 +1,7 @@
 const notification = require('../../../lib/notifications')
 const userProfileTemplate = require('../templates/user-profile.hbs')
 const jobBoardTemplate = require('../templates/job-board.hbs')
+const userJobsTemplate = require('../templates/user-jobs.hbs')
 const store = require('../store')
 
 const onGetUserProfileSuccess = function (response) {
@@ -17,7 +18,7 @@ const onGetUserPostedJobsSuccess = function (response) {
   const userJobs = response.jobs.filter(function (job) {
     return job.user.id === store.user.id
   })
-  const jobBoard = jobBoardTemplate({ jobs: userJobs })
+  const jobBoard = userJobsTemplate({ jobs: userJobs })
   $('#user-posted-jobs tbody').append(jobBoard)
 }
 

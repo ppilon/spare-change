@@ -1,6 +1,9 @@
 const jobBoardTemplate = require('../templates/job-board.hbs')
+const userJobsTemplate = require('../templates/user-jobs.hbs')
 const Handlebars = require('handlebars')
 const notification = require('../../../lib/notifications')
+const jobsApi = require('./api')
+const store = require('../store')
 
 let newJobMap;
 let directionsDisplay;
@@ -13,6 +16,20 @@ const onGetJobsSuccess = function (response) {
 const onGetPendingJobsSuccess = function (response) {
   const jobBoard = jobBoardTemplate({ jobs: response.jobs })
   $('#jobTable tbody').append(jobBoard)
+}
+
+const onDeleteJobSuccess = function () {
+  jobsApi.getJobs()
+    .then((response) => {
+      $('#user-posted-jobs tbody').empty()
+      const userJobs = response.jobs.filter(function (job) {
+        return job.user.id === store.user.id
+      })
+      const jobBoard = userJobsTemplate({ jobs: userJobs })
+      $('#user-posted-jobs tbody').append(jobBoard)
+    })
+  $('#header-notification .error-message').remove()
+  notification('success', "Successfully Deleted Job", 'header-notification')
 }
 
 const onCreateJobSuccess = function () {
@@ -86,5 +103,6 @@ module.exports = {
   showCreateJobView,
   onGetJobsSuccess,
   onCreateJobSuccess,
-  onCreateJobError
+  onCreateJobError,
+  onDeleteJobSuccess
 }

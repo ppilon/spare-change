@@ -15,6 +15,17 @@ const getPendingJobs = function () {
   })
 }
 
+const deleteJob = function (jobId) {
+  return $.ajax({
+    url: apiUrl + '/jobs/' + jobId,
+    method: 'DELETE',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const createJob = function (data) {
   return $.ajax({
     method: 'POST',
@@ -30,5 +41,6 @@ const createJob = function (data) {
 module.exports = {
   getJobs,
   getPendingJobs,
-  createJob
+  createJob,
+  deleteJob
 }
