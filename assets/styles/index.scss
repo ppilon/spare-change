@@ -10,6 +10,19 @@ body {
   margin-right: 10px;
 }
 
+#create-job-view {
+  display: none;
+}
+
+.col-centered {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.job-submit-btn {
+  width: 100%;
+}
+
 .sidebar {
   color: white;
   text-align: center;
@@ -97,4 +110,16 @@ h1 {
   width: 300px;
   padding-top: 20px;
   padding-left: 20px;
+}
+
+.pad-top {
+  padding-top: 15px;
+}
+
+#createJobMap {
+  width: 90%;
+  height: 400px;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }

@@ -12,6 +12,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
       <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyNI2p6szj3_FwE-VfjwWRhaCJ8AiKICM"></script>
     </head>
     <body>
       <header>
@@ -24,7 +25,7 @@
             <li> <a href="#signup" id="signup-link"> Signup </a> </li>
           </ul>
           <ul class="navbar-items logged-in-navbar-items">
-            <li> <a href="#login" id="login-link"> New Job </a> </li>
+            <li> <a href="#newJob" id="new-job-link"> New Job </a> </li>
             <li> <a href="#login" id="login-link"> Change Password </a> </li>
           </ul>
         </nav>
@@ -32,21 +33,73 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h2> Job Board </h2>
-            <div class="table-responsive">
-              <table class="table table-bordered" id="jobBoard">
-                <thead>
-                  <tr>
-                    <th> Pickup Address </th>
-                    <th> Dropoff Address </th>
-                    <th> Due Date </th>
-                    <th> Instructions </th>
-                    <th> Cost </th>
-                    <th> Customer Username </th>
-                  </tr>
-                </thead>
-                <tbody> </tbody>
-              </table>
+            <div id="jobBoard">
+              <h2> Job Board </h2>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="jobTable">
+                  <thead>
+                    <tr>
+                      <th> Pickup Address </th>
+                      <th> Dropoff Address </th>
+                      <th> Due Date </th>
+                      <th> Instructions </th>
+                      <th> Cost </th>
+                      <th> Customer Username </th>
+                    </tr>
+                  </thead>
+                  <tbody> </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="create-job-view">
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="createJobMap"></div>
+                </div>
+                <div class="col-md-6">
+                  <form id="create-job-form">
+                    <div class="row pad-top">
+                      <div class="col-md-6">
+                        <label> Dropoff Address </label>
+                        <input type="text" class="dropoff_address form-control" name="job[dropoff_address]" class="address" id="dropoff-address">
+                      </div>
+                      <div class="col-md-6">
+                        <label> Pickup Address </label>
+                        <input type="text" class="pickup_address form-control" name="job[pickup_address]" class="address" id="pickup-address">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-centered" id="geocode-error"></div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <label> Instructions </label>
+                        <textarea class="instructions form-control" name="job[instructions]"> </textarea>
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-6">
+                        <label> Cost </label>
+                        <input type="text" class="cost form-control" disabled id="jobCost" name="job[cost]">
+                      </div>
+                      <div class="col-md-6">
+                        <label> Due Date </label>
+                        <input type="date" class="due_date form-control" name="job[due_date]">
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary job-submit-btn">
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <div class="notification-area"> </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -8,6 +8,19 @@ const getJobs = function() {
   })
 }
 
+const createJob = function (data) {
+  return $.ajax({
+    method: 'POST',
+    url: apiUrl + '/jobs',
+    data,
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
-  getJobs
+  getJobs,
+  createJob
 }
