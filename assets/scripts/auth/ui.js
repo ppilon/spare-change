@@ -44,7 +44,7 @@ const onSignInSuccess = function (response) {
   $('.logged-out-navbar-items').hide()
   resetSignInForm()
   store.user = response.user
-  console.log(store.user)
+  sessionStorage.setItem('user', JSON.stringify(store.user))
 }
 
 const onSignInError = function () {
