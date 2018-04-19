@@ -69,7 +69,7 @@ const showJobsView = function () {
   $('#user-profile-view').hide()
 }
 
-const onGetDirectionsError = function (directions) {
+const onGetDirectionsError = function () {
   $('#create-job-form .error-message').remove()
   const errorParagraph = document.createElement("p")
   errorParagraph.innerHTML = 'Could not locate addresses'
