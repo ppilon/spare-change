@@ -55,11 +55,29 @@ const onSignUpSuccess = function (response) {
   $('#signupModal').modal('hide')
 }
 
+const onChangePasswordSuccess = function () {
+  $('#change-password-status').empty()
+  $('#change-password-status').css('color', 'green')
+  $('#change-password-status').append('Password Change Successful')
+}
+const onChangePasswordError = function () {
+  $('#change-password-status').empty()
+  $('#change-password-status').css('color', 'red')
+  $('#change-password-status').append('Password Change NOT Successful')
+}
+
+const openChangePasswordModal = function () {
+  $('#change-password-modal').modal('show')
+}
+
 module.exports = {
+  openChangePasswordModal,
   openSignUpModal,
   openSignInModal,
   onSignUpSuccess,
   onSignUpError,
   onSignInError,
-  onSignInSuccess
+  onSignInSuccess,
+  onChangePasswordSuccess,
+  onChangePasswordError
 }
