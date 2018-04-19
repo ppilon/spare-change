@@ -17,7 +17,7 @@ const onGetPendingJobsSuccess = function (response) {
 
 const onCreateJobSuccess = function () {
   $('#create-job-form .error-message').remove()
-  notification('success', "Successfully Created Job")
+  notification('success', "Successfully Created Job", 'new-job-notification')
 }
 
 const onCreateJobError = function (jqXHR) {

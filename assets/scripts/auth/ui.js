@@ -47,7 +47,7 @@ const onSignInSuccess = function (response) {
   resetSignInForm()
   store.user = response.user
   sessionStorage.setItem('user', JSON.stringify(store.user))
-  notification('success', "Successfully Logged In")
+  notification('success', "Successfully Logged In", 'header-notification')
 }
 
 const onSignInError = function () {
@@ -77,7 +77,7 @@ const onLogoutSuccess = function () {
   $('.logged-in-navbar-items').hide()
   $('.logged-out-navbar-items').show()
   sessionStorage.removeItem('user')
-  notification('success', "Successfully Logged You Out")
+  notification('success', "Successfully Logged You Out", 'header-notification')
 }
 
 module.exports = {
