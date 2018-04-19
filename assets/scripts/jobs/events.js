@@ -18,40 +18,41 @@ const jobHandlers = function () {
 	$('#create-job-form').on('submit', onCreateJob)
 	$('#jobs-link').on('click', jobsUi.showJobsView)
   $('#create-job-view').on('keydown', 'input', (event) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-      const inputName = $(event.target).attr('name')
-      if(inputName === 'job[pickup_address]' || inputName === 'job[dropoff_address]' ) {
-        const pickup_address = $('[name="job[pickup_address]"]').val()
-        const dropoff_address = $('[name="job[dropoff_address]"]').val()
-        if(pickup_address && dropoff_address) {
-          if(inputName === 'job[pickup_address]') {
+		setTimeout(function(){
+			const inputName = $(event.target).attr('name')
+			if(inputName === 'job[pickup_address]' || inputName === 'job[dropoff_address]' ) {
+				const pickup_address = $('[name="job[pickup_address]"]').val()
+				const dropoff_address = $('[name="job[dropoff_address]"]').val()
+				if(pickup_address && dropoff_address) {
+					if(inputName === 'job[pickup_address]') {
 						store.newJobAddresses.pickup_address = pickup_address
-            getDirections(pickup_address, store.newJobAddresses.dropoff_address)
-            .then(jobsUi.displayDirections)
+						getDirections(pickup_address, store.newJobAddresses.dropoff_address)
+						.then(jobsUi.displayDirections)
 						.then(calculateDistance)
 						.then(calculateCost)
 						.then(jobsUi.displayJobCost)
 						.catch(jobsUi.onGetDirectionsError)
-          }
-          else {
+					}
+					else {
 						store.newJobAddresses.dropoff_address = dropoff_address
-            getDirections(store.newJobAddresses.pickup_address, dropoff_address)
-            .then(jobsUi.displayDirections)
+						console.log("pickup address", store.newJobAddresses.pickup_address)
+						console.log("dropoff address", dropoff_address)
+						getDirections(store.newJobAddresses.pickup_address, dropoff_address)
+						.then(jobsUi.displayDirections)
 						.then(calculateDistance)
 						.then(calculateCost)
 						.then(jobsUi.displayJobCost)
 						.catch(jobsUi.onGetDirectionsError)
-          }
-        }
-        else if(pickup_address) {
-          store.newJobAddresses.pickup_address = pickup_address
-        }
-        else if(dropoff_address) {
-          store.newJobAddresses.dropoff_address = dropoff_address
-        }
-      }
-		}, 600);
+					}
+				}
+				else if(pickup_address) {
+					store.newJobAddresses.pickup_address = pickup_address
+				}
+				else if(dropoff_address) {
+					store.newJobAddresses.dropoff_address = dropoff_address
+				}
+			}
+		}, 300);
   })
 }
 
@@ -70,14 +71,13 @@ const getDirections = function(origin, destination) {
       destination,
       travelMode: 'DRIVING'
     }
+		console.log(request)
     directionsService.route(request, function(response, status) {
-      if (status == "OK") {
-				console.log('ok')
-        resolve(response)
+      if (status === 'OK') {
+				resolve(response)
       }
       else {
-				console.log('not ok')
-        reject(console.error)
+				reject(response)
       }
     })
   })
@@ -93,10 +93,10 @@ const calculateDistance = function (directions) {
 			travelMode: 'DRIVING',
 			unitSystem: google.maps.UnitSystem.IMPERIAL
 		}, function(response, status) {
-			if (status == 'OK') {
+			if (status === 'OK') {
 				resolve(response)
 			} else {
-				reject(console.error)
+				reject(status)
 			}
 		})
 	})
