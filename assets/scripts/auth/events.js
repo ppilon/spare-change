@@ -9,6 +9,13 @@ const authEvents = function () {
   $('#signinForm').on('submit', onSignIn)
   $('#change-password-link').on('click', ui.openChangePasswordModal)
   $('#change-password-form').on('submit', onChangePassword)
+  $('#logout-link').on('click', onLogout)
+}
+
+const onLogout = function (event) {
+  event.preventDefault()
+  api.logout()
+  .then(ui.onLogoutSuccess)
 }
 
 const onSignUp = function (event) {

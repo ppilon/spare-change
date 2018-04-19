@@ -1,4 +1,6 @@
 const store = require('../store')
+const notification = require('../../../lib/notifications')
+
 const openSignUpModal = function () {
   $('#signupModal').modal('show')
 }
@@ -45,6 +47,7 @@ const onSignInSuccess = function (response) {
   resetSignInForm()
   store.user = response.user
   sessionStorage.setItem('user', JSON.stringify(store.user))
+  notification('success', "Successfully Logged In")
 }
 
 const onSignInError = function () {
@@ -70,7 +73,15 @@ const openChangePasswordModal = function () {
   $('#change-password-modal').modal('show')
 }
 
+const onLogoutSuccess = function () {
+  $('.logged-in-navbar-items').hide()
+  $('.logged-out-navbar-items').show()
+  sessionStorage.removeItem('user')
+  notification('success', "Successfully Logged You Out")
+}
+
 module.exports = {
+  onLogoutSuccess,
   openChangePasswordModal,
   openSignUpModal,
   openSignInModal,
