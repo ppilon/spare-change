@@ -7,6 +7,8 @@ const authEvents = function () {
   $('#login-link').on('click', ui.openSignInModal)
   $('#signupForm').on('submit', onSignUp)
   $('#signinForm').on('submit', onSignIn)
+  $('#change-password-link').on('click', ui.openChangePasswordModal)
+  $('#change-password-form').on('submit', onChangePassword)
 }
 
 const onSignUp = function (event) {
@@ -15,6 +17,14 @@ const onSignUp = function (event) {
   api.signUp(data)
   .then(ui.onSignUpSuccess)
   .catch(ui.onSignUpError)
+}
+
+const onChangePassword = function () {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.changePassword(data)
+  .then(ui.onChangePasswordSuccess)
+  .catch(ui.onChangePasswordError)
 }
 
 const onSignIn = function (event) {
