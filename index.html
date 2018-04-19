@@ -12,32 +12,174 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
       <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
       <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyNI2p6szj3_FwE-VfjwWRhaCJ8AiKICM"></script>
     </head>
     <body>
       <header>
-        <h1> <i class="fab fa-bitcoin"></i>Spare Change </h1>
+        <nav>
+          <div class="nav-brand">
+            <h1> <i class="fab fa-bitcoin"></i>Spare Change </h1>
+          </div>
+          <ul class="navbar-items logged-out-navbar-items">
+            <li> <a href="#login" id="login-link"> Login </a> </li>
+            <li> <a href="#signup" id="signup-link"> Signup </a> </li>
+          </ul>
+          <ul class="navbar-items logged-in-navbar-items">
+            <li> <a href="#newJob" id="new-job-link"> New Job </a> </li>
+            <li> <a href="#login" id="login-link"> Change Password </a> </li>
+          </ul>
+        </nav>
       </header>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <h2> Job Board </h2>
-            <div class="table-responsive">
-              <table class="table table-bordered" id="jobBoard">
-                <thead>
-                  <tr>
-                    <th> Pickup Address </th>
-                    <th> Dropoff Address </th>
-                    <th> Due Date </th>
-                    <th> Instructions </th>
-                    <th> Cost </th>
-                    <th> Customer Username </th>
-                  </tr>
-                </thead>
-                <tbody> </tbody>
-              </table>
+            <div id="jobBoard">
+              <h2> Job Board </h2>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="jobTable">
+                  <thead>
+                    <tr>
+                      <th> Pickup Address </th>
+                      <th> Dropoff Address </th>
+                      <th> Due Date </th>
+                      <th> Instructions </th>
+                      <th> Cost </th>
+                      <th> Customer Username </th>
+                    </tr>
+                  </thead>
+                  <tbody> </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="create-job-view">
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="createJobMap"></div>
+                </div>
+                <div class="col-md-6">
+                  <form id="create-job-form">
+                    <div class="row pad-top">
+                      <div class="col-md-6">
+                        <label> Dropoff Address </label>
+                        <input type="text" class="dropoff_address form-control" name="job[dropoff_address]" class="address" id="dropoff-address">
+                      </div>
+                      <div class="col-md-6">
+                        <label> Pickup Address </label>
+                        <input type="text" class="pickup_address form-control" name="job[pickup_address]" class="address" id="pickup-address">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-centered" id="geocode-error"></div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <label> Instructions </label>
+                        <textarea class="instructions form-control" name="job[instructions]"> </textarea>
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-6">
+                        <label> Cost </label>
+                        <input type="text" class="cost form-control" disabled id="jobCost" name="job[cost]">
+                      </div>
+                      <div class="col-md-6">
+                        <label> Due Date </label>
+                        <input type="date" class="due_date form-control" name="job[due_date]">
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary job-submit-btn">
+                      </div>
+                    </div>
+                    <div class="row pad-top">
+                      <div class="col-md-12">
+                        <div class="notification-area"> </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="modal fade signupModal" tabindex="-1" role="dialog" id="signupModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form id="signupForm">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Signup</h4>
+              </div>
+              <div class="modal-body container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label> First Name </label>
+                    <input type="text" name="credentials[user_profile_attributes][first_name]" id="user_profile.first_name">
+                  </div>
+                  <div class="col-md-6">
+                    <label> Last Name </label>
+                    <input type="text" name="credentials[user_profile_attributes][last_name]" id="user_profile.last_name">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label> Email </label>
+                    <input type="email" name="credentials[email]" id="email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label> Username </label>
+                    <input type="text" name="credentials[user_profile_attributes][username]" id="user_profile.username">
+                  </div>
+                  <div class="col-md-6">
+                    <label> Phone Number</label>
+                    <input type="phone_number" name="credentials[user_profile_attributes][phone_number]" id="user_profile.phone_number">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label> Password </label>
+                    <input type="password" name="credentials[password]" id="password">
+                  </div>
+                  <div class="col-md-6">
+                    <label> Password Confirm </label>
+                    <input type="password" name="credentials[password_confirmation]" id="password_confirmation">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn login-btn">Signup</button>
+              </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="signinModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form id="signinForm">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Login</h4>
+              </div>
+              <div class="modal-body">
+                <label> Email </label>
+                <input type="email" name="credentials[email]">
+                <label> Password </label>
+                <input type="password" name="credentials[password]">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn login-btn">Login</button>
+                <p id="sign-in-error-message"> Could Not Sign You In </p>
+              </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     </body>
 </html>

@@ -1,13 +1,26 @@
 const store = require('../store')
-const config = require('../config')
+const apiUrl = require('../config')
 
 const getJobs = function() {
   return $.ajax({
     method: 'GET',
-    url: config.apiUrl + '/jobs'
+    url: apiUrl + '/jobs'
+  })
+}
+
+const createJob = function (data) {
+  return $.ajax({
+    method: 'POST',
+    url: apiUrl + '/jobs',
+    data,
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
   })
 }
 
 module.exports = {
-  getJobs
+  getJobs,
+  createJob
 }
