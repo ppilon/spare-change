@@ -16,6 +16,7 @@ const latlngs = {
 const jobHandlers = function () {
   $('#new-job-link').on('click', jobsUi.showCreateJobView)
 	$('#create-job-form').on('submit', onCreateJob)
+	$('#jobs-link').on('click', jobsUi.showJobsView)
   $('#create-job-view').on('keydown', 'input', (event) => {
     clearTimeout(timeout);
     timeout = setTimeout(function () {

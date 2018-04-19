@@ -50,7 +50,7 @@ const displayDirections = function (directions) {
 }
 
 const showCreateJobView = function () {
-  $('#jobBoard').hide()
+  $('#job-view').hide()
   $('#create-job-view').show()
   newJobMap = new google.maps.Map(document.getElementById('createJobMap'), {
     center: {lat: -34.397, lng: 150.644},
@@ -62,6 +62,11 @@ const displayJobCost = function (cost) {
   $('#jobCost').val('$' + cost)
 }
 
+const showJobsView = function () {
+  $('#job-view').show()
+  $('#create-job-view').hide()
+}
+
 const onGetDirectionsError = function (directions) {
   $('#create-job-form .error-message').remove()
   const errorParagraph = document.createElement("p")
@@ -71,6 +76,7 @@ const onGetDirectionsError = function (directions) {
 }
 
 module.exports = {
+  showJobsView,
   onGetPendingJobsSuccess,
   displayJobCost,
   onGetDirectionsError,

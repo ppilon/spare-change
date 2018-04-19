@@ -25,8 +25,9 @@
             <li> <a href="#signup" id="signup-link"> Signup </a> </li>
           </ul>
           <ul class="navbar-items logged-in-navbar-items">
+            <li> <a href="#jobs" id="jobs-link"> Jobs</a> </li>
             <li> <a href="#newJob" id="new-job-link"> New Job </a> </li>
-            <li> <a href="#login" id="change-password-link"> Change Password </a> </li>
+            <li> <a href="#change-password" id="change-password-link"> Change Password </a> </li>
             <li> <a href="#login" id="logout-link"> Logout </a> </li>
           </ul>
         </nav>
@@ -35,7 +36,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <div id="jobBoard">
+            <div id="logged-out-view">
               <h2> Job Board </h2>
               <div class="table-responsive">
                 <table class="table table-bordered" id="jobTable">
@@ -53,53 +54,96 @@
                 </table>
               </div>
             </div>
-            <div id="create-job-view">
-              <div class="row">
-                <div class="col-md-6">
-                  <div id="createJobMap"></div>
+            <div id="logged-in-view">
+              <div id="job-view">
+                <div class="row">
+                  <div class="col-md-6 col-centered">
+                    <h2> Job Listings </h2>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th> Pickup Address </th>
+                            <th> Dropoff Address </th>
+                            <th> Due Date </th>
+                            <th> Instructions </th>
+                            <th> Cost </th>
+                            <th> Customer Username </th>
+                          </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-centered">
+                    <h2> My Jobs </h2>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th> Pickup Address </th>
+                            <th> Dropoff Address </th>
+                            <th> Due Date </th>
+                            <th> Instructions </th>
+                            <th> Cost </th>
+                            <th> Edit </th>
+                            <th> Delete </th>
+                          </tr>
+                        </thead>
+                        <tbody> </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <form id="create-job-form">
-                    <div class="row pad-top">
-                      <div class="col-md-6">
-                        <label> Dropoff Address </label>
-                        <input type="text" class="dropoff_address form-control" name="job[dropoff_address]" class="address" id="dropoff-address">
+              </div>
+              <div id="create-job-view">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div id="createJobMap"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <form id="create-job-form">
+                      <div class="row pad-top">
+                        <div class="col-md-6">
+                          <label> Dropoff Address </label>
+                          <input type="text" class="dropoff_address form-control" name="job[dropoff_address]" class="address" id="dropoff-address">
+                        </div>
+                        <div class="col-md-6">
+                          <label> Pickup Address </label>
+                          <input type="text" class="pickup_address form-control" name="job[pickup_address]" class="address" id="pickup-address">
+                        </div>
                       </div>
-                      <div class="col-md-6">
-                        <label> Pickup Address </label>
-                        <input type="text" class="pickup_address form-control" name="job[pickup_address]" class="address" id="pickup-address">
+                      <div class="row">
+                        <div class="col-md-12 col-centered" id="geocode-error"></div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 col-centered" id="geocode-error"></div>
-                    </div>
-                    <div class="row pad-top">
-                      <div class="col-md-12">
-                        <label> Instructions </label>
-                        <textarea class="instructions form-control" name="job[instructions]"> </textarea>
+                      <div class="row pad-top">
+                        <div class="col-md-12">
+                          <label> Instructions </label>
+                          <textarea class="instructions form-control" name="job[instructions]"> </textarea>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row pad-top">
-                      <div class="col-md-6">
-                        <label> Cost </label>
-                        <input type="text" class="cost form-control" disabled id="jobCost" name="job[cost]">
+                      <div class="row pad-top">
+                        <div class="col-md-6">
+                          <label> Cost </label>
+                          <input type="text" class="cost form-control" disabled id="jobCost" name="job[cost]">
+                        </div>
+                        <div class="col-md-6">
+                          <label> Due Date </label>
+                          <input type="date" class="due_date form-control" name="job[due_date]">
+                        </div>
                       </div>
-                      <div class="col-md-6">
-                        <label> Due Date </label>
-                        <input type="date" class="due_date form-control" name="job[due_date]">
+                      <div class="row pad-top">
+                        <div class="col-md-12">
+                          <input type="submit" class="btn btn-primary job-submit-btn">
+                        </div>
                       </div>
-                    </div>
-                    <div class="row pad-top">
-                      <div class="col-md-12">
-                        <input type="submit" class="btn btn-primary job-submit-btn">
+                      <div class="row pad-top">
+                        <div class="col-md-12">
+                          <div class="notification-area" id="new-job-notification"> </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row pad-top">
-                      <div class="col-md-12">
-                        <div class="notification-area" id="new-job-notification"> </div>
-                      </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>

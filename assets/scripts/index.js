@@ -11,5 +11,7 @@ $(() => {
   if (store.user.token != null) {
     $('.logged-in-navbar-items').show()
     $('.logged-out-navbar-items').hide()
+    $('#logged-in-view').show()
+    $('#logged-out-view').hide()
   }
 })
