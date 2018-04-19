@@ -1,5 +1,7 @@
 const notification = require('../../../lib/notifications')
 const userProfileTemplate = require('../templates/user-profile.hbs')
+const jobBoardTemplate = require('../templates/job-board.hbs')
+const store = require('../store')
 
 const onGetUserProfileSuccess = function (response) {
   $('#user-profile-col').empty()
@@ -8,6 +10,15 @@ const onGetUserProfileSuccess = function (response) {
   $('#create-job-view').hide()
   const userProfile = userProfileTemplate({ user: response.user })
   $('#user-profile-col').append(userProfile)
+}
+
+const onGetUserPostedJobsSuccess = function (response) {
+  $('#user-posted-jobs tbody').empty()
+  const userJobs = response.jobs.filter(function (job) {
+    return job.user.id === store.user.id
+  })
+  const jobBoard = jobBoardTemplate({ jobs: userJobs })
+  $('#user-posted-jobs tbody').append(jobBoard)
 }
 
 const onUpdateUserError = function (jqXHR) {
@@ -31,6 +42,7 @@ const onUpdateUserSuccess = function () {
 
 
 module.exports = {
+  onGetUserPostedJobsSuccess,
   onUpdateUserSuccess,
   onUpdateUserError,
   onGetUserProfileSuccess

@@ -1,10 +1,20 @@
 const userUi = require('./ui')
 const userApi = require('./api')
 const getFormFields = require('../../../lib/get-form-fields')
+const jobsApi = require('../jobs/api')
 
 const userHandlers = function () {
-  $('#my-profile-link').on('click', onGetUserProfile)
+  $('#my-profile-link').on('click', (event) => {
+    onGetUserProfile(event)
+    onGetUserPostedJobs(event)
+  })
   $('body').on('submit', '#user-profile-form', onUpdateUser)
+}
+
+const onGetUserPostedJobs = function (event) {
+  event.preventDefault()
+  jobsApi.getJobs()
+  .then(userUi.onGetUserPostedJobsSuccess)
 }
 
 const onGetUserProfile = function () {
