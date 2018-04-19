@@ -106,6 +106,11 @@ const onGetJobs = function () {
     .then(jobsUi.onGetJobsSuccess)
 }
 
+const onGetPendingJobs = function () {
+  jobsApi.getPendingJobs()
+    .then(jobsUi.onGetPendingJobsSuccess)
+}
+
 const onCreateJob = function (event) {
 	event.preventDefault()
 	const data = getFormFields(event.target)
@@ -118,5 +123,6 @@ const onCreateJob = function (event) {
 
 module.exports = {
   jobHandlers,
-  onGetJobs
+  onGetJobs,
+	onGetPendingJobs
 }

@@ -6,7 +6,7 @@ const store = require('./store')
 
 $(() => {
   jobsEvents.jobHandlers()
-  jobsEvents.onGetJobs()
+  jobsEvents.onGetPendingJobs()
   authEvents.authEvents()
   if (store.user.token != null) {
     $('.logged-in-navbar-items').show()

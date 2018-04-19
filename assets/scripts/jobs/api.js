@@ -8,6 +8,13 @@ const getJobs = function() {
   })
 }
 
+const getPendingJobs = function () {
+  return $.ajax({
+    method: 'GET',
+    url: apiUrl + '/jobs?status=pending_acceptance'
+  })
+}
+
 const createJob = function (data) {
   return $.ajax({
     method: 'POST',
@@ -22,5 +29,6 @@ const createJob = function (data) {
 
 module.exports = {
   getJobs,
+  getPendingJobs,
   createJob
 }

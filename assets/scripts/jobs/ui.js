@@ -10,6 +10,11 @@ const onGetJobsSuccess = function (response) {
   $('#jobTable tbody').append(jobBoard)
 }
 
+const onGetPendingJobsSuccess = function (response) {
+  const jobBoard = jobBoardTemplate({ jobs: response.jobs })
+  $('#jobTable tbody').append(jobBoard)
+}
+
 const onCreateJobSuccess = function () {
   $('#create-job-form .error-message').remove()
   notification('success', "Successfully Created Job")
@@ -66,6 +71,7 @@ const onGetDirectionsError = function (directions) {
 }
 
 module.exports = {
+  onGetPendingJobsSuccess,
   displayJobCost,
   onGetDirectionsError,
   displayDirections,
