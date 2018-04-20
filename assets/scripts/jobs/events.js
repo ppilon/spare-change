@@ -12,11 +12,13 @@ const latlngs = {
 	'dropoff_latlng': []
 }
 
-
 const jobHandlers = function () {
   $('#new-job-link').on('click', jobsUi.showCreateJobView)
 	$('#create-job-form').on('submit', onCreateJob)
-	$('#jobs-link').on('click', jobsUi.showJobsView)
+	$('#jobs-link').on('click', () => {
+		onGetNonUserJobs()
+		jobsUi.showJobsView()
+	})
 	$('body').on('click', '.edit-job', onGetJob)
 	$('body').on('submit', '#edit-job-form', onUpdateJob)
   $('#create-job-view').on('keydown', 'input', (event) => {
@@ -54,6 +56,11 @@ const jobHandlers = function () {
 			}
 		}, 300);
   })
+}
+
+const onGetNonUserJobs = function (event) {
+	  jobsApi.getJobs()
+	    .then(jobsUi.onGetNonUserJobsSuccess)
 }
 
 const onUpdateJob = function (event) {
@@ -134,6 +141,7 @@ const onCreateJob = function (event) {
 }
 
 module.exports = {
+	onGetNonUserJobs,
   jobHandlers,
   onGetJobs,
 	onGetPendingJobs

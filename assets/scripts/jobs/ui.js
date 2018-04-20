@@ -121,6 +121,15 @@ const displayJobCost = function (cost) {
   $('#jobCost').val('$' + cost)
 }
 
+const onGetNonUserJobsSuccess = function (response) {
+  $('#non-user-jobs tbody').empty()
+  const nonUserJobs = response.jobs.filter(function (job) {
+    return job.user.id !== store.user.id
+  })
+  const jobBoard = jobBoardTemplate({ jobs: nonUserJobs })
+  $('#non-user-jobs tbody').append(jobBoard)
+}
+
 const showJobsView = function () {
   $('#job-view').show()
   $('#create-job-view').hide()
@@ -136,6 +145,7 @@ const onGetDirectionsError = function () {
 }
 
 module.exports = {
+  onGetNonUserJobsSuccess,
   onUpdateJobSuccess,
   onUpdateJobError,
   onGetJobSuccess,
