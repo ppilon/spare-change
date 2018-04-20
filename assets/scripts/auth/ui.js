@@ -61,11 +61,15 @@ const onSignUpSuccess = function (response) {
 }
 
 const onChangePasswordSuccess = function () {
+  const changePasswordForm = document.getElementById('change-password-form')
+  changePasswordForm.reset()
   $('#change-password-status').empty()
   $('#change-password-status').css('color', 'green')
   $('#change-password-status').append('Password Change Successful')
 }
 const onChangePasswordError = function () {
+  const changePasswordForm = document.getElementById('change-password-form')
+  changePasswordForm.reset()
   $('#change-password-status').empty()
   $('#change-password-status').css('color', 'red')
   $('#change-password-status').append('Password Change NOT Successful')
