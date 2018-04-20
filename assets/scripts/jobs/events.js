@@ -17,6 +17,8 @@ const jobHandlers = function () {
   $('#new-job-link').on('click', jobsUi.showCreateJobView)
 	$('#create-job-form').on('submit', onCreateJob)
 	$('#jobs-link').on('click', jobsUi.showJobsView)
+	$('body').on('click', '.edit-job', onGetJob)
+	$('body').on('submit', '#edit-job-form', onUpdateJob)
   $('#create-job-view').on('keydown', 'input', (event) => {
 		setTimeout(function(){
 			const inputName = $(event.target).attr('name')
@@ -54,6 +56,20 @@ const jobHandlers = function () {
 			}
 		}, 300);
   })
+}
+
+const onUpdateJob = function (event) {
+	event.preventDefault()
+	const data = getFormFields(event.target)
+	jobsApi.updateJob(data)
+		.then(jobsUi.onUpdateJobSuccess)
+		.catch(jobsUi.onUpdateJobError)
+}
+
+const onGetJob = function (event) {
+	const jobId = $(this).parent().siblings().first().text()
+	jobsApi.getJob(jobId)
+	.then(jobsUi.onGetJobSuccess)
 }
 
 const calculateCost = function (distanceObject) {
