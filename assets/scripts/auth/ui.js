@@ -84,6 +84,9 @@ const onLogoutSuccess = function () {
   $('.logged-out-navbar-items').show()
   $('#logged-out-view').show()
   $('#logged-in-view').hide()
+  const createJobForm = document.getElementById('create-job-form')
+  createJobForm.reset()
+  $('#create-job-form .error-message').remove()
   sessionStorage.removeItem('user')
   notification('success', "Successfully Logged You Out", 'header-notification')
 }
