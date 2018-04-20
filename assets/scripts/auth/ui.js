@@ -58,6 +58,8 @@ const onSignInError = function () {
 
 const onSignUpSuccess = function (response) {
   $('#signupModal').modal('hide')
+  const signupForm = document.getElementById('signupForm')
+  signupForm.reset()
 }
 
 const onChangePasswordSuccess = function () {
