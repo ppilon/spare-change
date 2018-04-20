@@ -7,6 +7,10 @@ const authEvents = function () {
     const signupForm = document.getElementById('signupForm')
     signupForm.reset()
   })
+  $('#signinModal').on('hidden.bs.modal', function () {
+    const signinForm = document.getElementById('signinForm')
+    signinForm.reset()
+  })
   $('#signup-link').on('click', ui.openSignUpModal)
   $('#login-link').on('click', ui.openSignInModal)
   $('#signupForm').on('submit', onSignUp)

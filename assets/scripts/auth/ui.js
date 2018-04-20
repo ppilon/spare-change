@@ -34,11 +34,6 @@ const onSignUpError = function (jqXHR, textStatus, errorThrown) {
   }
 }
 
-const resetSignInForm = function () {
-  const signupForm = document.getElementById('signinForm')
-  signupForm.reset()
-}
-
 const onSignInSuccess = function (response) {
   $('#logged-out-view').hide()
   $('#logged-in-view').show()
@@ -46,7 +41,8 @@ const onSignInSuccess = function (response) {
   $('#signinModal').modal('hide')
   $('.logged-in-navbar-items').show()
   $('.logged-out-navbar-items').hide()
-  resetSignInForm()
+  const signinForm = document.getElementById('signinForm')
+  signinForm.reset()
   store.user = response.user
   sessionStorage.setItem('user', JSON.stringify(store.user))
   notification('success', "Successfully Logged In", 'header-notification')
@@ -54,6 +50,8 @@ const onSignInSuccess = function (response) {
 
 const onSignInError = function () {
   $('#sign-in-error-message').show()
+  const signinForm = document.getElementById('signinForm')
+  signinForm.reset()
 }
 
 const onSignUpSuccess = function (response) {
