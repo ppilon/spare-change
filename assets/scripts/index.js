@@ -15,5 +15,6 @@ $(() => {
     $('.logged-out-navbar-items').hide()
     $('#logged-in-view').show()
     $('#logged-out-view').hide()
+    jobsEvents.onGetNonUserJobs()
   }
 })

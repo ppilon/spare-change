@@ -1,10 +1,10 @@
 const jobBoardTemplate = require('../templates/job-board.hbs')
-const userJobsTemplate = require('../templates/user-jobs.hbs')
 const editJobTemplate = require('../templates/edit-job-form.hbs')
 const Handlebars = require('handlebars')
 const notification = require('../../../lib/notifications')
 const jobsApi = require('./api')
 const store = require('../store')
+const userJobsTemplate = require('../templates/user-jobs.hbs')
 
 let newJobMap;
 let directionsDisplay;
@@ -21,6 +21,16 @@ const onUpdateJobSuccess = function () {
   successParagraph.className = 'pull-left success'
   successParagraph.innerHTML = 'Successfully Updated Job'
   $('#edit-job-form .modal-footer').append(successParagraph)
+  jobsApi.getJobs()
+  .then((response) => {
+    $('#edit-job-modal').modal('hide')
+    $('#user-posted-jobs tbody').empty()
+    const userJobs = response.jobs.filter(function (job) {
+      return job.user.id === store.user.id
+    })
+    const jobBoard = userJobsTemplate({ jobs: userJobs })
+    $('#user-posted-jobs tbody').append(jobBoard)
+  })
 }
 
 const onUpdateJobError = function (jqXHR) {
@@ -111,6 +121,15 @@ const displayJobCost = function (cost) {
   $('#jobCost').val('$' + cost)
 }
 
+const onGetNonUserJobsSuccess = function (response) {
+  $('#non-user-jobs tbody').empty()
+  const nonUserJobs = response.jobs.filter(function (job) {
+    return job.user.id !== store.user.id
+  })
+  const jobBoard = jobBoardTemplate({ jobs: nonUserJobs })
+  $('#non-user-jobs tbody').append(jobBoard)
+}
+
 const showJobsView = function () {
   $('#job-view').show()
   $('#create-job-view').hide()
@@ -126,6 +145,7 @@ const onGetDirectionsError = function () {
 }
 
 module.exports = {
+  onGetNonUserJobsSuccess,
   onUpdateJobSuccess,
   onUpdateJobError,
   onGetJobSuccess,
