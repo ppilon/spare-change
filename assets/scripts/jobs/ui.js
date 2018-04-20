@@ -64,6 +64,8 @@ const onDeleteJobSuccess = function () {
 }
 
 const onCreateJobSuccess = function () {
+  const createJobForm = document.getElementById('create-job-form')
+  createJobForm.reset()
   $('#create-job-form .error-message').remove()
   notification('success', "Successfully Created Job", 'new-job-notification')
 }
