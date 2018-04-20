@@ -37,8 +37,6 @@ const jobHandlers = function () {
 					}
 					else {
 						store.newJobAddresses.dropoff_address = dropoff_address
-						console.log("pickup address", store.newJobAddresses.pickup_address)
-						console.log("dropoff address", dropoff_address)
 						getDirections(store.newJobAddresses.pickup_address, dropoff_address)
 						.then(jobsUi.displayDirections)
 						.then(calculateDistance)
@@ -87,7 +85,6 @@ const getDirections = function(origin, destination) {
       destination,
       travelMode: 'DRIVING'
     }
-		console.log(request)
     directionsService.route(request, function(response, status) {
       if (status === 'OK') {
 				resolve(response)
@@ -100,7 +97,6 @@ const getDirections = function(origin, destination) {
 }
 
 const calculateDistance = function (directions) {
-	console.log(directions)
 	return new Promise(function(resolve, reject) {
 		const service = new google.maps.DistanceMatrixService
 		service.getDistanceMatrix({
@@ -131,7 +127,6 @@ const onGetPendingJobs = function () {
 const onCreateJob = function (event) {
 	event.preventDefault()
 	const data = getFormFields(event.target)
-		console.log(data)
 	data.job.cost = data.job.cost.substring(1)
   jobsApi.createJob(data)
     .then(jobsUi.onCreateJobSuccess)

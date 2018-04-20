@@ -3,6 +3,14 @@ const api = require('./api')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
 const authEvents = function () {
+  $('#signupModal').on('hidden.bs.modal', function () {
+    const signupForm = document.getElementById('signupForm')
+    signupForm.reset()
+  })
+  $('#signinModal').on('hidden.bs.modal', function () {
+    const signinForm = document.getElementById('signinForm')
+    signinForm.reset()
+  })
   $('#signup-link').on('click', ui.openSignUpModal)
   $('#login-link').on('click', ui.openSignInModal)
   $('#signupForm').on('submit', onSignUp)

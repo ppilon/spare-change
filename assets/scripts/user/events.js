@@ -29,7 +29,6 @@ const onGetUserProfile = function () {
 }
 
 const onUpdateUser = function (event) {
-  console.log('update event called')
   event.preventDefault()
   const data = getFormFields(event.target)
   userApi.updateUser(data)

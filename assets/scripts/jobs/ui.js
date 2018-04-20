@@ -27,10 +27,8 @@ const onUpdateJobError = function (jqXHR) {
   $('#edit-job-form .modal-footer p').remove()
   $('#edit-job-form .error-message').remove()
   if(jqXHR.responseJSON) {
-    console.log(jqXHR.responseJSON)
     for(const error in jqXHR.responseJSON) {
       const inputParent = $('.' + error).parent()
-      console.log(inputParent)
       const errorParagraph = document.createElement("p")
       errorParagraph.className = 'error-message'
       errorParagraph.innerHTML = error + ' ' + jqXHR.responseJSON[error]
@@ -66,6 +64,8 @@ const onDeleteJobSuccess = function () {
 }
 
 const onCreateJobSuccess = function () {
+  const createJobForm = document.getElementById('create-job-form')
+  createJobForm.reset()
   $('#create-job-form .error-message').remove()
   notification('success', "Successfully Created Job", 'new-job-notification')
 }
@@ -74,10 +74,8 @@ const onCreateJobError = function (jqXHR) {
   $('#create-job-form .notification-area').children().remove()
   $('#create-job-form .error-message').remove()
   if(jqXHR.responseJSON) {
-    console.log(jqXHR.responseJSON)
     for(const error in jqXHR.responseJSON) {
       const inputParent = $('.' + error).parent()
-      console.log(inputParent)
       const errorParagraph = document.createElement("p")
       errorParagraph.className = 'error-message'
       errorParagraph.innerHTML = error + ' ' + jqXHR.responseJSON[error]

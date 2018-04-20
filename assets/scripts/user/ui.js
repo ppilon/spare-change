@@ -24,10 +24,8 @@ const onGetUserPostedJobsSuccess = function (response) {
 
 const onUpdateUserError = function (jqXHR) {
   if(jqXHR.responseJSON) {
-    console.log(jqXHR.responseJSON)
     for(const error in jqXHR.responseJSON) {
       const inputParent = $('.' + error).parent()
-      console.log(inputParent)
       const errorParagraph = document.createElement("p")
       errorParagraph.className = 'error-message'
       errorParagraph.innerHTML = error + ' ' + jqXHR.responseJSON[error]
