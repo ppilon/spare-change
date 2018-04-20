@@ -15,10 +15,29 @@ const getPendingJobs = function () {
   })
 }
 
+const getJob = function (jobId) {
+  return $.ajax({
+    method: 'GET',
+    url: apiUrl + '/jobs/' + jobId
+  })
+}
+
 const deleteJob = function (jobId) {
   return $.ajax({
     url: apiUrl + '/jobs/' + jobId,
     method: 'DELETE',
+    headers: {
+      contentType: 'application/json',
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updateJob = function (data) {
+  return $.ajax({
+    method: 'PATCH',
+    url: apiUrl + '/jobs/' + data.job.id,
+    data,
     headers: {
       contentType: 'application/json',
       Authorization: 'Token token=' + store.user.token
@@ -39,8 +58,10 @@ const createJob = function (data) {
 }
 
 module.exports = {
+  updateJob,
   getJobs,
   getPendingJobs,
   createJob,
-  deleteJob
+  deleteJob,
+  getJob
 }

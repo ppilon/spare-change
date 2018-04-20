@@ -2,7 +2,7 @@
     <tr>
       <td>{{job.pickup_address}}</td>
       <td> {{job.dropoff_address}} </td>
-      <td> {{#convertDate job.due_date}} {{/convertDate}} </td>
+      <td> {{#convertDateReadable job.due_date}} {{/convertDateReadable}} </td>
       <td> {{job.instructions}} </td>
       <td> {{#addDollarSign job.cost}} {{/addDollarSign}}</td>
       <td> {{job.user.user_profile.username}} </td>

@@ -1,5 +1,6 @@
 const jobBoardTemplate = require('../templates/job-board.hbs')
 const userJobsTemplate = require('../templates/user-jobs.hbs')
+const editJobTemplate = require('../templates/edit-job-form.hbs')
 const Handlebars = require('handlebars')
 const notification = require('../../../lib/notifications')
 const jobsApi = require('./api')
@@ -13,9 +14,41 @@ const onGetJobsSuccess = function (response) {
   $('#jobTable tbody').append(jobBoard)
 }
 
+const onUpdateJobSuccess = function () {
+  $('#edit-job-form .error-message').remove()
+  $('#edit-job-form .modal-footer p').remove()
+  const successParagraph = document.createElement("p")
+  successParagraph.className = 'pull-left success'
+  successParagraph.innerHTML = 'Successfully Updated Job'
+  $('#edit-job-form .modal-footer').append(successParagraph)
+}
+
+const onUpdateJobError = function (jqXHR) {
+  $('#edit-job-form .modal-footer p').remove()
+  $('#edit-job-form .error-message').remove()
+  if(jqXHR.responseJSON) {
+    console.log(jqXHR.responseJSON)
+    for(const error in jqXHR.responseJSON) {
+      const inputParent = $('.' + error).parent()
+      console.log(inputParent)
+      const errorParagraph = document.createElement("p")
+      errorParagraph.className = 'error-message'
+      errorParagraph.innerHTML = error + ' ' + jqXHR.responseJSON[error]
+      $(inputParent).append(errorParagraph)
+    }
+  }
+}
+
 const onGetPendingJobsSuccess = function (response) {
   const jobBoard = jobBoardTemplate({ jobs: response.jobs })
   $('#jobTable tbody').append(jobBoard)
+}
+
+const onGetJobSuccess = function (response) {
+  $('#edit-job-modal-content').empty()
+  const jobForm = editJobTemplate({ job: response.job })
+  $('#edit-job-modal-content').append(jobForm)
+  $('#edit-job-modal').modal('show')
 }
 
 const onDeleteJobSuccess = function () {
@@ -95,6 +128,9 @@ const onGetDirectionsError = function () {
 }
 
 module.exports = {
+  onUpdateJobSuccess,
+  onUpdateJobError,
+  onGetJobSuccess,
   showJobsView,
   onGetPendingJobsSuccess,
   displayJobCost,

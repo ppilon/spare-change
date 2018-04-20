@@ -1,0 +1,42 @@
+<form id="edit-job-form">
+  <input type="hidden" name="job[id]" value="{{job.id}}">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Edit Job</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row pad-top">
+      <div class="col-md-6">
+        <label> Dropoff Address </label>
+        <input type="text" class="dropoff_address form-control" name="job[dropoff_address]" class="address" id="dropoff-address" value="{{job.dropoff_address}}">
+      </div>
+      <div class="col-md-6">
+        <label> Pickup Address </label>
+        <input type="text" class="pickup_address form-control" name="job[pickup_address]" class="address" id="pickup-address" value="{{job.pickup_address}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-centered" id="geocode-error"></div>
+    </div>
+    <div class="row pad-top">
+      <div class="col-md-12">
+        <label> Instructions </label>
+        <textarea class="instructions form-control" name="job[instructions]"> {{job.instructions}}</textarea>
+      </div>
+    </div>
+    <div class="row pad-top">
+      <div class="col-md-6">
+        <label> Cost </label>
+        <input type="text" class="cost form-control" disabled id="jobCost" name="job[cost]" value="{{job.cost}}">
+      </div>
+      <div class="col-md-6">
+        <label> Due Date </label>
+        <input type="date" class="due_date form-control" name="job[due_date]" value={{#convertDateForDropdown job.due_date}} {{/convertDateForDropdown}}>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-default">Update Job</button>
+  </div>
+</form>
